@@ -7,6 +7,7 @@ mod open_dialog;
 mod open_url_dialog;
 mod preferences_dialog;
 mod volume_controls;
+mod rng_display_dialog;
 
 use crate::custom_event::RuffleEvent;
 use crate::player::LaunchOptions;
@@ -52,6 +53,7 @@ pub struct Dialogs {
     is_volume_visible: bool,
 
     is_about_visible: bool,
+    is_rng_display_visible: bool,
 
     preferences: GlobalPreferences,
 }
@@ -95,6 +97,7 @@ impl Dialogs {
             is_volume_visible: false,
 
             is_about_visible: false,
+            is_rng_display_visible: false,
 
             event_loop,
             picker,
@@ -158,6 +161,10 @@ impl Dialogs {
         self.is_about_visible = true;
     }
 
+    pub fn open_rng_display(&mut self){
+        self.is_rng_display_visible = true;
+    }
+
     pub fn open_dialog(&mut self, event: DialogDescriptor) {
         match event {
             DialogDescriptor::OpenUrl(url) => {
@@ -191,6 +198,7 @@ impl Dialogs {
         self.show_message_dialog(locale, egui_ctx);
         self.show_network_access_dialog(locale, egui_ctx);
         self.show_filesystem_access_dialog(locale, egui_ctx);
+        self.show_rng_display_dialog(locale, egui_ctx)
     }
 
     fn show_open_dialog(&mut self, locale: &LanguageIdentifier, egui_ctx: &egui::Context) {
@@ -251,6 +259,13 @@ impl Dialogs {
         if self.is_about_visible {
             let keep_open = about_dialog::show_about_dialog(locale, egui_ctx);
             self.is_about_visible = keep_open;
+        }
+    }
+
+    fn show_rng_display_dialog(&mut self, locale: &LanguageIdentifier, egui_ctx: &egui::Context) {
+        if self.is_rng_display_visible {
+            let keep_open = rng_display_dialog::show_rng_display_dialog(locale, egui_ctx);
+            self.is_rng_display_visible = keep_open;
         }
     }
 

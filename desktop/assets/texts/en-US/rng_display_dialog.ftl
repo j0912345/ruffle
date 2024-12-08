@@ -1,0 +1,1 @@
+rng-display-dialog = RNG display

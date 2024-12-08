@@ -178,6 +178,14 @@ impl MenuBar {
                     if ui.button(text(locale, "help-menu-about")).clicked() {
                         dialogs.open_about_screen();
                         ui.close_menu();
+
+
+                    }
+                    /* TODO: move this to another category, probably under `debug` or `view`  */
+                    ui.separator();
+                    if ui.button(text(locale, "help-menu-show-rng-display")).clicked() {
+                        dialogs.open_rng_display();
+                        ui.close_menu();
                     }
                 });
             });

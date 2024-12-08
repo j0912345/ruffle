@@ -31,9 +31,9 @@ use std::collections::HashMap;
 use std::sync::{MutexGuard, Weak};
 use std::{fs, mem};
 use unic_langid::LanguageIdentifier;
-use winit::event_loop::EventLoopProxy;
+use winit::event_loop::EventLoopProxy; 
 
-static_loader! {
+static_loader! {  
     static TEXTS = {
         locales: "./assets/texts",
         fallback_language: "en-US"
